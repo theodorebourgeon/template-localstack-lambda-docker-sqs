@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "53:53"
+      - "443:443"
+      - "4510-4520:4510-4520"
+      - "4566-4620:4566-4620"
+    environment:
+      - SERVICES=s3,sqs,sns,lambda
+      - DEFAULT_REGION=us-east-1
+      - LAMBDA_EXECUTOR=docker
+      - LAMBDA_REMOTE_DOCKER=true
+      - LAMBDA_REMOVE_CONTAINERS=true
+      - DATA_DIR=/tmp/localstack/data
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./bin:/docker-entrypoint-initaws.d
+    env_file:
+      - .env
+    networks:
+      - localstack
+
+  test-lambda:
+    image: test-lambda:latest
+    build:
+      context: ./lambdas/python-lambda
+    networks:
+      - localstack
+
+networks:
+  localstack:
+    external: false
+    driver: bridge
+    name: localstack
