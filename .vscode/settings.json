@@ -1,0 +1,24 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.tabCompletion": "on",
+  "python.pythonPath": "~/.virtualenvs/venv/bin/python3",
+  "python.sortImports.args": [
+    "--sp",
+    "/Users/tbourgeon/workspace/template-localstack-lambda-docker-sqs/isort.cfg"
+  ],
+  "python.linting.pylintEnabled": false,
+  "python.linting.mypyEnabled": false,
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--line-length=120", "--ignore="],
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": ["--line-length=120"],
+  "[python]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  }
+}

@@ -1,0 +1,8 @@
+Dockerfile
+2 README.md
+3 *.pyc
+4 *.pyo
+5 *.pyd
+6 __pycache__
+7 .pytest_cache
+8 events
